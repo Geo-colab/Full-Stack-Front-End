@@ -1,0 +1,43 @@
+﻿<!-- nav -->
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="home">Home</a>
+        <a class="nav-item nav-link">Homes for Sale</a>
+        <a class="nav-item nav-link">Sell a House</a>
+        <a class="nav-item nav-link" routerLink="/account/login">Login</a>
+        <a class="nav-item nav-link" routerLink="/account/register">Register</a>
+    </div>
+</nav>
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="user">
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">MyAdverts</a>
+        <a class="nav-item nav-link">My Profile</a>
+        <a class="nav-item nav-link">Buy a House</a>
+        <a class="nav-item nav-link">Sell a House</a>
+        <a class="nav-item nav-link">Manage my Account</a>
+        <a class="nav-item nav-link">My Seller Profile</a>
+        <a class="nav-item nav-link">Favourite Houses</a>
+        <a class="nav-item nav-link" (click)="logout()">Logout</a>
+    </div>
+</nav>
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="isAdmin">
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="/users" routerLinkActive="active">User Management</a>
+        <a class="nav-item nav-link">Advert Management</a>
+        <a class="nav-item nav-link" (click)="logout()">Logout</a>
+    </div>
+</nav>
+
+<!-- main app container -->
+<div class="app-container" [ngClass]="{ 'bg-light': user }">
+    <alert></alert>
+    <router-outlet></router-outlet>
+</div>
+
+<!-- credits -->
+<div class="text-center mt-4">
+    <p> 
+        WelcomeHome! @ 2021. All Rights Reserved.
+    </p>
+   
+</div>
