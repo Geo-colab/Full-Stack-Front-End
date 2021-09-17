@@ -1,4 +1,7 @@
-﻿<!-- nav -->
+﻿<div class="Logo">
+    <img src="assets\WHLogo.jpg"  width="270" height="100">
+</div>
+<!-- nav -->
 <nav class="navbar navbar-expand navbar-dark bg-dark">
     <div class="navbar-nav">
         <a class="nav-item nav-link" routerLink="home">Home</a>
@@ -8,7 +11,7 @@
         <a class="nav-item nav-link" routerLink="/account/register">Register</a>
     </div>
 </nav>
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="user">
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="isUser">
     <div class="navbar-nav">
         <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">MyAdverts</a>
         <a class="nav-item nav-link">My Profile</a>

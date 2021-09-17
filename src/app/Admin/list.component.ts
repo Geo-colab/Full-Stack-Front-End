@@ -2,6 +2,7 @@
 import { first } from 'rxjs/operators';
 
 import { AccountService } from '@app/_services';
+import { User } from '@app/_models';
 
 @Component({ templateUrl: 'list.component.html' })
 export class ListComponent implements OnInit {
