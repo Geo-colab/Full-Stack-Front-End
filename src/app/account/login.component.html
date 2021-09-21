@@ -3,7 +3,7 @@
     <div class="card-body">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="form-group">
-                <label for="username">Username</label>
+                <label for="username">Email</label>
                 <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
                 <div class="invalid">
                 <p><small>Min 6, Max 100 characters. Must contain @.</small></p>

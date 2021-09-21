@@ -5,22 +5,32 @@ import { first } from 'rxjs/operators';
 
 import { AccountService, AlertService } from '@app/_services';
 
-//Validate password confirm
- function passwordMatcher(c: AbstractControl): { [key: string]: boolean } | null {
-    const passwordControl = c.get('password');
-    const confirmControl = c.get('passwordConfirm');
-  
-    if (passwordControl.value === confirmControl.value) {
-      return null;
+ //Validate password confirm
+ function passwordMatcher(controlName: string, matchingControlName: string) {
+    return (formGroup: FormGroup) => {
+        const control = formGroup.controls[controlName];
+        const matchingControl = formGroup.controls[matchingControlName];
+
+        if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+            // return if another validator has already found an error on the matchingControl
+            return;
+        }
+
+        // set error on matchingControl if validation fails
+        if (control.value !== matchingControl.value) {
+            matchingControl.setErrors({ mustMatch: true });
+        } else {
+            matchingControl.setErrors(null);
+        }
     }
-    return { match: true };
-  }
+}
 
 @Component({ templateUrl: 'register.component.html' })
 export class RegisterComponent implements OnInit {
     form: FormGroup;
     loading = false;
     submitted = false;
+   
 
     constructor(
         private formBuilder: FormBuilder,
@@ -36,12 +46,12 @@ export class RegisterComponent implements OnInit {
             lastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
             username: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100), Validators.email]],
             password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(100)]],
-            passwordConfirm: ['', [Validators.required]],
+            passwordConfirm: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(100)]],
         },
-        { validator: passwordMatcher });
+        { validator: passwordMatcher('password', 'passwordConfirm') });
     }
-
-    // convenience getter for easy access to form fields
+    
+  // convenience getter for easy access to form fields
     get f() { return this.form.controls; }
 
     onSubmit() {

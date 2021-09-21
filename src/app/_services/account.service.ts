@@ -47,7 +47,13 @@ export class AccountService {
         user.username.trim();
         user.password.trim();
         user.role = Role.User;
-        return this.http.post(`${environment.apiUrl}/users/register`, user);
+        return this.http.post<User>(`${environment.apiUrl}/users/register`, user)
+        .pipe(map(user => {
+            // store user details and jwt token in local storage to keep user logged in between page refreshes
+            localStorage.setItem('user', JSON.stringify(user));
+            this.userSubject.next(user);
+            return user;
+        }));
     }
 
     getAll() {
