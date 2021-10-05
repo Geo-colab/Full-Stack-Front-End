@@ -1,4 +1,5 @@
-﻿import { Role } from "./role.enum";
+﻿import { Advert } from "./advert";
+import { Role } from "./role.enum";
 
 export class User {
     id: string;
@@ -8,4 +9,5 @@ export class User {
     lastName: string;
     role: Role;
     token: string;
+    adverts: Advert[];
 }

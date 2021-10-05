@@ -8,6 +8,7 @@ import { environment } from '@environments/environment';
 import { User } from '@app/_models';
 import { Role } from '@app/_models/role.enum';
 
+
 @Injectable({ providedIn: 'root' })
 export class AccountService {
     private userSubject: BehaviorSubject<User>;
@@ -56,8 +57,15 @@ export class AccountService {
         }));
     }
 
+    create(user: User) {
+        user.username.trim();
+        user.password.trim();
+        user.role = Role.User;
+        return this.http.post<User>(`${environment.apiUrl}/users/create`, user)
+    }
+
     getAll() {
-        return this.http.get<User[]>(`${environment.apiUrl}/users`);
+        return this.http.get<User[]>(`${environment.apiUrl}/users`);   
     }
 
     getById(id: string) {

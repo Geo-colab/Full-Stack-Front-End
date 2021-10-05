@@ -5,6 +5,7 @@ import { first } from 'rxjs/operators';
 
 import { AccountService, AlertService } from '@app/_services';
 
+
 @Component({ templateUrl: 'add-edit.component.html' })
 export class AddEditComponent implements OnInit {
     form: FormGroup;
@@ -18,7 +19,7 @@ export class AddEditComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private accountService: AccountService,
-        private alertService: AlertService
+        private alertService: AlertService,
     ) {}
 
     ngOnInit() {
@@ -45,7 +46,7 @@ export class AddEditComponent implements OnInit {
                     this.f.firstName.setValue(x.firstName);
                     this.f.lastName.setValue(x.lastName);
                     this.f.username.setValue(x.username);
-                });
+                });        
         }
     }
 
@@ -72,7 +73,7 @@ export class AddEditComponent implements OnInit {
     }
 
     private createUser() {
-        this.accountService.register(this.form.value)
+        this.accountService.create(this.form.value)
             .pipe(first())
             .subscribe(
                 data => {
@@ -90,6 +91,7 @@ export class AddEditComponent implements OnInit {
             .pipe(first())
             .subscribe(
                 data => {
+                    console.log(this.id)
                     this.alertService.success('Update successful', { keepAfterRouteChange: true });
                     this.router.navigate(['..', { relativeTo: this.route }]);
                 },

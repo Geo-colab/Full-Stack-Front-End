@@ -7,13 +7,14 @@ import { User } from '@app/_models';
 @Component({ templateUrl: 'list.component.html' })
 export class ListComponent implements OnInit {
     users = null;
+    
 
-    constructor(private accountService: AccountService) {}
+    constructor(private accountService: AccountService) {  console.log(this.users);}
 
     ngOnInit() {
         this.accountService.getAll()
             .pipe(first())
-            .subscribe(users => this.users = users);
+            .subscribe(users => this.users = users);   
     }
 
     deleteUser(id: string) {
@@ -25,4 +26,6 @@ export class ListComponent implements OnInit {
                 this.users = this.users.filter(x => x.id !== id) 
             });
     }
+
+    
 }
