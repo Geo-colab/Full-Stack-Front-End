@@ -10,7 +10,8 @@ import { AccountService, AlertService } from '@app/_services';
 import { AdvertService } from '@app/_services/advert.service';
 import { first } from 'rxjs/operators';
 
-@Component({ templateUrl: 'my-adverts.component.html' })
+@Component({ templateUrl: 'my-adverts.component.html',
+             styleUrls: ['my-adverts.component.css'] })
 export class MyAdvertsComponent {
     users: User;
     adverts: Advert[];
@@ -25,15 +26,14 @@ export class MyAdvertsComponent {
     }
 
     ngOnInit() {
-
-        //EK kry nie die twee gelink dat hy die town en province wys inplaas van die id's op die list nie.
        
         this.advertService.getAdvertsByUserId(this.users.id)
-            .pipe(first())
-            .subscribe(adverts => this.adverts = adverts.filter(filterAdvert => filterAdvert.advertState == 'Live' || filterAdvert.advertState == 'Hidden' ))
-        
+            .subscribe(adverts => 
+                {
+                    this.adverts = adverts.filter(filterAdvert => filterAdvert.advertState === 'Live' || filterAdvert.advertState ===  'Hidden' );
+                });
+
         this.advertService.getAllProvinces()
-            .pipe(first())
             .subscribe(provinces => this.provinces = provinces);      
     }
 
@@ -49,7 +49,6 @@ export class MyAdvertsComponent {
         advertUpdate.advertState = AdvertState.Hide;
         
         this.advertService.updateAdvert(advertUpdate.id, advertUpdate)
-        .pipe(first())
         .subscribe(
             data => {
                 window.location.reload();
@@ -72,7 +71,6 @@ export class MyAdvertsComponent {
         advertUpdate.advertState = AdvertState.Live;
         
         this.advertService.updateAdvert(advertUpdate.id, advertUpdate)
-        .pipe(first())
         .subscribe(
             data => {
                 window.location.reload();
@@ -96,7 +94,6 @@ export class MyAdvertsComponent {
        
         if(confirm(`Are you sure you want to delete ${advertUpdate.advertHead}?`)) {
             this.advertService.updateAdvert(advertUpdate.id, advertUpdate)
-        .pipe(first())
         .subscribe(
             data => {
                 window.location.reload();

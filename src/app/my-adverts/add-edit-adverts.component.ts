@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '@app/_models';
 import { Advert } from '@app/_models/advert';
 import { AdvertState } from '@app/_models/advert-state.enum';
+import { City } from '@app/_models/city';
 import { AccountService, AlertService } from '@app/_services';
 import { AdvertService } from '@app/_services/advert.service';
 import { first } from 'rxjs/operators'; 
@@ -19,7 +20,7 @@ export class AddEditAdvertsComponent implements OnInit {
     loading = false;
     submitted = false;
     provinces = null;
-    cities = null;
+    cities: City[] = [];
     users: User;
   
     constructor(
@@ -53,7 +54,6 @@ export class AddEditAdvertsComponent implements OnInit {
 
     if (!this.isAddMode) {
       this.advertService.getById(this.id)
-        .pipe(first())
         .subscribe(x => {
             this.f.advertHead.setValue(x.advertHead);
             this.f.provinceId.setValue(x.provinceId);
@@ -64,18 +64,25 @@ export class AddEditAdvertsComponent implements OnInit {
             this.f.id.setValue(x.id);
             this.f.advertState.setValue(x.advertState);
             console.log(x);
+            this.getCities();
         });
+    
       }
 
       this.advertService.getAllProvinces()
-      .pipe(first())
       .subscribe((provinces) => {this.provinces = provinces;
                                  console.log(provinces)}); 
-      
+  
     }
-
-    // convenience getter for easy access to form fields
+    
+   // convenience getter for easy access to form fields
     get f() { return this.form.controls; }
+  
+     //populate city select on province selection
+     getCities() {
+        this.advertService.getCitiesByProvinceId(this.f.provinceId.value)
+        .subscribe((cities) => {this.cities = cities})
+    }
 
     onSubmit() {
       this.submitted = true;
@@ -107,7 +114,6 @@ export class AddEditAdvertsComponent implements OnInit {
       advert.userId = this.users.id;
 
       this.advertService.createAdvert(advert)
-          .pipe(first())
           .subscribe(
               data => {
                   this.alertService.success('Advert added successfully', { keepAfterRouteChange: true });
@@ -121,7 +127,6 @@ export class AddEditAdvertsComponent implements OnInit {
 
   private updateAdvert() {
     this.advertService.updateAdvert(this.id, this.form.value)
-        .pipe(first())
         .subscribe(
             data => {
                 this.alertService.success('Advert Published Successfully', { keepAfterRouteChange: true });

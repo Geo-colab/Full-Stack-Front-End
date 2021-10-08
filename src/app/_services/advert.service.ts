@@ -1,12 +1,12 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '@app/_models';
 import { Advert } from '@app/_models/advert';
+import { City } from '@app/_models/city';
 import { Province } from '@app/_models/province';
 import { environment } from '@environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +38,10 @@ export class AdvertService {
 
     getAllProvinces() { 
        return this.http.get<Province[]>(`${environment.apiUrl}/adverts/provinces`);       
+    }
+
+    getCitiesByProvinceId(id: string) {
+        return this.http.get<City[]>(`${environment.apiUrl}/adverts/provinces/cities/${id}`);   
     }
 
     createAdvert(advert: Advert) {

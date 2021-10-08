@@ -13,7 +13,6 @@ export class ListComponent implements OnInit {
 
     ngOnInit() {
         this.accountService.getAll()
-            .pipe(first())
             .subscribe(users => this.users = users);   
     }
 
@@ -21,7 +20,6 @@ export class ListComponent implements OnInit {
         const user = this.users.find(x => x.id === id);
         user.isDeleting = true;
         this.accountService.delete(id)
-            .pipe(first())
             .subscribe(() => {
                 this.users = this.users.filter(x => x.id !== id) 
             });

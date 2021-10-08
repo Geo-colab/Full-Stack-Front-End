@@ -21,37 +21,12 @@
         <tbody *ngFor="let advert of adverts">
             <tr >
                 <td>{{advert.advertHead}}</td>
-                <td>{{advert.provinceId}}</td>
-                <td>{{advert.cityId}}</td>
+                <td>{{advert.province.name}}</td>
+                <td>{{advert.city.name}}</td>
                 <td>{{advert.advertDetails}}</td>
-                <td>{{advert.price}}</td>
+                <td>{{advert.price | currency:'ZAR' : 'symbol-narrow':'4.2-2'}}</td>
                 <td>{{advert.advertState}}</td>
                 <td style="white-space: nowrap">
-                    <style>
-                        .dropdown-content {
-                                      display: none;
-                                      width: 100%;
-                                      overflow: auto;
-                                      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-                                      
-                                   }
-                                   .dropdown:hover .dropdown-content {
-                                       display: block;
-                                      
-                                   }
-                                   .dropdown-content a {
-                                       display: block;
-                                       color: #000000;
-                                       padding: 5px;
-                                       text-decoration: none;
-                                       
-                                   }
-                                   .dropdown-content a:hover {
-                                        color: #FFFFFF;
-                                        background-color: rgb(181, 230, 29);
-                                      
-}
-                    </style>
                     <div class="dropdown">
                         <button class="btn btn-sm btn-primary mr-1">Action...</button>
                         <div class="dropdown-content">

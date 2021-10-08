@@ -41,7 +41,6 @@ export class AddEditComponent implements OnInit {
 
         if (!this.isAddMode) {
             this.accountService.getById(this.id)
-                .pipe(first())
                 .subscribe(x => {
                     this.f.firstName.setValue(x.firstName);
                     this.f.lastName.setValue(x.lastName);
@@ -49,6 +48,8 @@ export class AddEditComponent implements OnInit {
                 });        
         }
     }
+
+    
 
     // convenience getter for easy access to form fields
     get f() { return this.form.controls; }
@@ -74,7 +75,6 @@ export class AddEditComponent implements OnInit {
 
     private createUser() {
         this.accountService.create(this.form.value)
-            .pipe(first())
             .subscribe(
                 data => {
                     this.alertService.success('User added successfully', { keepAfterRouteChange: true });
@@ -88,7 +88,6 @@ export class AddEditComponent implements OnInit {
 
     private updateUser() {
         this.accountService.update(this.id, this.form.value)
-            .pipe(first())
             .subscribe(
                 data => {
                     console.log(this.id)

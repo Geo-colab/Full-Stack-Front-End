@@ -1,9 +1,7 @@
 <div class="card">
     <div class="card-header">
-
         <h1 *ngIf="isAddMode">Add Avert</h1>
         <h1 *ngIf="!isAddMode">Edit Advert</h1>
-
     </div>
   
     <div class="card-body">
@@ -50,7 +48,8 @@
             <div class="col-md-8">
               <select class="form-control"
                      formControlName="provinceId"
-                     [ngClass]="{ 'is-invalid': submitted && f.provinceId.errors }">
+                     [ngClass]="{ 'is-invalid': submitted && f.provinceId.errors }"
+                     (change) = "getCities()">
                      <option *ngFor="let province of provinces" [value]="province.id">{{province.name}}</option>
                   </select>
                   <span class="btn-sm">
@@ -59,85 +58,21 @@
             </div>
           </div>
        
-          <!--City drop down list if Gauteng-->
-          <div class="form-group row mb-2" *ngIf="f.provinceId.value === '1' && provinces">
+          <!--City drop down list-->
+          <div class="form-group row mb-2">
             <label class="col-md-2 col-form-label"
                    for="cityId">Select City</label>
             <div class="col-md-8" >
               <select class="form-control"
                      formControlName="cityId"
                      [ngClass]="{ 'is-invalid': submitted && f.cityId.errors }">
-                     <option *ngFor="let city of provinces[0].cities" [value]="city.id">{{city.name}}</option>
+                     <option *ngFor="let city of cities" [value]="city.id">{{city.name}}</option>
                   </select>
                   <span class="btn-sm">
                       Please select a city.
                   </span>
             </div>
         </div>
-
-         <!--City drop down list if Free State-->
-        <div class="form-group row mb-2" *ngIf="f.provinceId.value === '2' && provinces">
-          <label class="col-md-2 col-form-label"
-                 for="cityId">Select City</label>
-          <div class="col-md-8" >
-            <select class="form-control"
-                   formControlName="cityId"
-                   [ngClass]="{ 'is-invalid': submitted && f.cityId.errors }">
-                   <option *ngFor="let city of provinces[1].cities" [value]="city.id">{{city.name}}</option>
-                </select>
-                <span class="btn-sm">
-                    Please select a city.
-                </span>
-          </div>
-      </div>
-
-      <!--City drop down list if Western Cape-->
-      <div class="form-group row mb-2" *ngIf="f.provinceId.value === '3' && provinces">
-        <label class="col-md-2 col-form-label"
-               for="cityId">Select City</label>
-        <div class="col-md-8" >
-          <select class="form-control"
-                 formControlName="cityId"
-                 [ngClass]="{ 'is-invalid': submitted && f.cityId.errors }">
-                 <option *ngFor="let city of provinces[2].cities" [value]="city.id">{{city.name}}</option>
-              </select>
-              <span class="btn-sm">
-                  Please select a city.
-              </span>
-        </div>
-    </div>
-
-    <!--City drop down list if Kwazulu-Natal-->
-    <div class="form-group row mb-2" *ngIf="f.provinceId.value === '4' && provinces">
-      <label class="col-md-2 col-form-label"
-             for="cityId">Select City</label>
-      <div class="col-md-8" >
-        <select class="form-control"
-               formControlName="cityId"
-               [ngClass]="{ 'is-invalid': submitted && f.cityId.errors }">
-               <option *ngFor="let city of provinces[3].cities" [value]="city.id">{{city.name}}</option>
-            </select>
-            <span class="btn-sm">
-                Please select a city.
-            </span>
-      </div>
-  </div>
-
-    <!--City drop down list if Limpopo-->
-    <div class="form-group row mb-2" *ngIf="f.provinceId.value === '5' && provinces">
-      <label class="col-md-2 col-form-label"
-             for="cityId">Select City</label>
-      <div class="col-md-8" >
-        <select class="form-control"
-               formControlName="cityId"
-               [ngClass]="{ 'is-invalid': submitted && f.cityId.errors }">
-               <option *ngFor="let city of provinces[4].cities" [value]="city.id">{{city.name}}</option>
-            </select>
-            <span class="btn-sm">
-                Please select a city.
-            </span>
-      </div>
-  </div>
       
          <!--Textbox for price-->
           <div class="form-group row mb-2">
