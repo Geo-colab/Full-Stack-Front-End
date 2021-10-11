@@ -1,11 +1,11 @@
 ﻿<div class="Logo">
-    <img src="assets\WHLogo.jpg"  width="360" height="100">
+    <img src="assets\WHLogo.jpg"  width="400" height="100">
 </div>
 <!-- nav -->
 <nav class="navbar navbar-expand navbar-dark bg-dark">
     <div class="navbar-nav">
         <a class="nav-item nav-link" routerLink="home">Home</a>
-        <a class="nav-item nav-link">Homes for Sale</a>
+        <a class="nav-item nav-link" routerLink="homes-for-sale">Homes for Sale</a>
         <a class="nav-item nav-link">Sell a House</a>
         <a class="nav-item nav-link" *ngIf = "!user" routerLink="/account/login" >Login</a>
         <a class="nav-item nav-link" *ngIf = "!user" routerLink="/account/register">Register</a>

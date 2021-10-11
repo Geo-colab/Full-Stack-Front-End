@@ -1,0 +1,12 @@
+.photo-placeholder {
+    float: right;
+}
+
+.details {
+    float: left;
+}
+
+.back-button {
+    bottom: 0;
+    position: absolute;
+}

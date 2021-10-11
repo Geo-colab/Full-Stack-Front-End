@@ -12,8 +12,11 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AppComponent } from './app.component';
 import { AlertComponent } from './_components';
 import { HomeComponent } from './home/home.component';
-import { MyAdvertsComponent } from './my-adverts';
-
+import { MyAdvertsComponent } from './my-adverts';;
+import { SearchComponent } from './search/search.component';
+import { HomesForSaleComponent } from './homes-for-sale/homes-for-sale.component';
+import { AdvertDetailsComponent } from './advert-details/advert-details.component';
+import { ContactSellerComponent } from './contact-seller/contact-seller.component';
 
 @NgModule({
     imports: [
@@ -26,7 +29,10 @@ import { MyAdvertsComponent } from './my-adverts';
         AppComponent,
         AlertComponent,
         HomeComponent,
-         
+        SearchComponent,
+        HomesForSaleComponent ,
+        AdvertDetailsComponent ,
+        ContactSellerComponent       
                         ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

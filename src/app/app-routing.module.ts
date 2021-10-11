@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AdvertDetailsComponent } from './advert-details/advert-details.component';
 import { HomeComponent } from './home/home.component';
+import { HomesForSaleComponent } from './homes-for-sale/homes-for-sale.component';
 
 import { MyAdvertsComponent } from './my-adverts';
 import { AuthGuard } from './_helpers';
@@ -14,7 +16,9 @@ const routes: Routes = [
     { path: '', loadChildren: myAdvertsModule, canActivate: [AuthGuard], data: {roles: [Role.User]} },
     { path: 'users', loadChildren: usersModule, canActivate: [AuthGuard], data: {roles: [Role.Admin]} },
     { path: 'account', loadChildren: accountModule },
-    {path: 'home', component: HomeComponent},
+    { path: 'home', component: HomeComponent},
+    { path: 'homes-for-sale', component: HomesForSaleComponent},
+    { path: 'advert-details/:id', component: AdvertDetailsComponent},
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

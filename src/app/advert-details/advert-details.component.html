@@ -1,0 +1,24 @@
+<div class="p-4">
+    <div class="container">
+        <h1>Advert Details</h1>
+    
+        
+        <div class="details">
+            <h5>{{advert.advertHead}}</h5>
+            <h6><b>Location:</b> {{advert.city.name}}, {{advert.province.name}}</h6>
+            <h6><b>Price:</b> {{advert.price | currency:'ZAR' : 'symbol-narrow':'4.2-2'}}</h6>
+            <h6><b>Description:</b> {{advert.advertDetails}}</h6>
+        </div>
+        <div class="photo-placeholder">
+            <img src="assets\WHPhotoFiller.jpeg">
+        </div>
+        </div>      
+</div>
+<div class="p-4">
+    <div class="container">
+        <div class="back-button">
+            <a routerLink="/homes-for-sale" class="btn btn-link">Back</a>
+        </div>
+        </div>
+        </div>
+

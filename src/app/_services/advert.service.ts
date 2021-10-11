@@ -28,6 +28,10 @@ export class AdvertService {
         return this.advertSubject.value;
     }
 
+    getAllAdverts() {
+        return this.http.get<Advert[]>(`${environment.apiUrl}/adverts`);   
+    }
+
     getById(id: string) {
         return this.http.get<Advert>(`${environment.apiUrl}/adverts/${id}`);
     }
