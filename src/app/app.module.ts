@@ -16,7 +16,8 @@ import { MyAdvertsComponent } from './my-adverts';;
 import { SearchComponent } from './search/search.component';
 import { HomesForSaleComponent } from './homes-for-sale/homes-for-sale.component';
 import { AdvertDetailsComponent } from './advert-details/advert-details.component';
-import { ContactSellerComponent } from './contact-seller/contact-seller.component';
+import { ContactSellerComponent } from './contact-seller/contact-seller.component';;
+import { ManageMyAccountComponent } from './manage-my-account/manage-my-account.component'
 
 @NgModule({
     imports: [
@@ -32,7 +33,8 @@ import { ContactSellerComponent } from './contact-seller/contact-seller.componen
         SearchComponent,
         HomesForSaleComponent ,
         AdvertDetailsComponent ,
-        ContactSellerComponent       
+        ContactSellerComponent ,
+        ManageMyAccountComponent      
                         ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

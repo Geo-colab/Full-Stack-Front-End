@@ -1,4 +1,6 @@
 import { AdvertState } from "./advert-state.enum";
+import { City } from "./city";
+import { Province } from "./province";
 
 export class Advert {
     id: string;
@@ -9,4 +11,6 @@ export class Advert {
     provinceId: string;
     cityId: string;
     userId: string;
+    province: Province;
+    city: City;
 }

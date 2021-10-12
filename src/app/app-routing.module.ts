@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdvertDetailsComponent } from './advert-details/advert-details.component';
 import { HomeComponent } from './home/home.component';
 import { HomesForSaleComponent } from './homes-for-sale/homes-for-sale.component';
+import { ManageMyAccountComponent } from './manage-my-account/manage-my-account.component';
 
 import { MyAdvertsComponent } from './my-adverts';
 import { AuthGuard } from './_helpers';
@@ -19,6 +20,7 @@ const routes: Routes = [
     { path: 'home', component: HomeComponent},
     { path: 'homes-for-sale', component: HomesForSaleComponent},
     { path: 'advert-details/:id', component: AdvertDetailsComponent},
+    { path: 'manage-my-account', component: ManageMyAccountComponent},
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

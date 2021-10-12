@@ -1,14 +1,11 @@
 ﻿import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { UsersModule } from '@app/Admin/users.module';
-
 import { User } from '@app/_models';
 import { Advert } from '@app/_models/advert';
 import { AdvertState } from '@app/_models/advert-state.enum';
 import { Province } from '@app/_models/province';
 import { AccountService, AlertService } from '@app/_services';
 import { AdvertService } from '@app/_services/advert.service';
-import { first } from 'rxjs/operators';
+
 
 @Component({ templateUrl: 'my-adverts.component.html',
              styleUrls: ['my-adverts.component.css'] })
@@ -18,15 +15,13 @@ export class MyAdvertsComponent {
     provinces: Province[];
     loading = false;
     
-    
     constructor(private accountService: AccountService,
                 private advertService: AdvertService,
                 private alertService: AlertService) {
         this.users = this.accountService.userValue;
     }
 
-    ngOnInit() {
-       
+    ngOnInit() {  
         this.advertService.getAdvertsByUserId(this.users.id)
             .subscribe(adverts => 
                 {

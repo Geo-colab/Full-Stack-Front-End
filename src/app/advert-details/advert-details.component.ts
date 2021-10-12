@@ -11,7 +11,7 @@ import { AdvertService } from '@app/_services/advert.service';
 export class AdvertDetailsComponent implements OnInit {
   
   id: string;
-  advert;
+  advert: Advert;
 
   constructor( private route: ActivatedRoute,
               private advertService: AdvertService) { }
