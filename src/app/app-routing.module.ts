@@ -5,7 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { HomesForSaleComponent } from './homes-for-sale/homes-for-sale.component';
 import { ManageMyAccountComponent } from './manage-my-account/manage-my-account.component';
 
-import { MyAdvertsComponent } from './my-adverts';
+import { MySellerProfileComponent } from './my-seller-profile/my-seller-profile.component';
 import { AuthGuard } from './_helpers';
 import { Role } from './_models/role.enum';
 
@@ -21,6 +21,7 @@ const routes: Routes = [
     { path: 'homes-for-sale', component: HomesForSaleComponent},
     { path: 'advert-details/:id', component: AdvertDetailsComponent},
     { path: 'manage-my-account', component: ManageMyAccountComponent},
+    { path: 'my-seller-profile', component: MySellerProfileComponent},
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

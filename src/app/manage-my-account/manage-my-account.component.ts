@@ -4,24 +4,24 @@ import { User } from '@app/_models';
 import { AccountService, AlertService } from '@app/_services';
 import { Subscription } from 'rxjs';
 
-//Validate password confirm
-function passwordMatcher(controlName: string, matchingControlName: string) {
-  return (formGroup: FormGroup) => {
-      const control = formGroup.controls[controlName];
-      const matchingControl = formGroup.controls[matchingControlName];
+//Validate new password confirm
+ function newPasswordMatcher(controlName: string, matchingControlName: string) {
+    return (formGroup: FormGroup) => {
+        const control = formGroup.controls[controlName];
+        const matchingControl = formGroup.controls[matchingControlName];
 
-      if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-          // return if another validator has already found an error on the matchingControl
-          return;
-      }
+        if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+            // return if another validator has already found an error on the matchingControl
+            return;
+        }
 
-      // set error on matchingControl if validation fails
-      if (control.value !== matchingControl.value) {
-          matchingControl.setErrors({ mustMatch: true });
-      } else {
-          matchingControl.setErrors(null);
-      }
-  }
+        // set error on matchingControl if validation fails
+        if (control.value !== matchingControl.value) {
+            matchingControl.setErrors({ mustMatch: true });
+        } else {
+            matchingControl.setErrors(null);
+        }
+    }
 }
 
 @Component({
@@ -40,7 +40,7 @@ export class ManageMyAccountComponent implements OnInit {
       private formBuilder: FormBuilder,
       private accountService: AccountService,
       private alertService: AlertService,
-  ) {  this.user = this.accountService.userValue; }
+  ) {  this.user = this.accountService.userValue; console.log(this.user.password) }
 
   ngOnInit() {
 
@@ -49,10 +49,10 @@ export class ManageMyAccountComponent implements OnInit {
           lastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
           username: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100), Validators.email]],
           password: [''],
-          newPassword: ['', [Validators.minLength(6), Validators.maxLength(100)]],
-          confirmNewPassword: ['', ]
+          newPassword: [''],
+          confirmNewPassword: ['']
       },
-      { validator: passwordMatcher('newPassword', 'confirmNewPassword')});
+      { validator: newPasswordMatcher('newPassword', 'confirmNewPassword')});
 
           this.accountService.getById(this.user.id)
               .subscribe(x => {
@@ -60,15 +60,21 @@ export class ManageMyAccountComponent implements OnInit {
                   this.f.lastName.setValue(x.lastName);
                   this.f.username.setValue(x.username);
                });  
-
-        //Not working 
-        this.subForm = this.form.get('password')?.valueChanges.subscribe(
-          (result: string) => {
-            if(result === ''){
-              this.form.get('newPassword')?.setValidators([Validators.required, Validators.minLength(8), Validators.maxLength(100)] );
-              this.form.get('confirmNewPassword').setValidators(Validators.required);
-            }});   
-              
+        
+        //Set validators for new password if password is entered       
+        this.subForm = this.form.get('password').valueChanges.subscribe(
+            (result: string) => {
+                if(result !== ''){
+                     this.form.get('newPassword').setValidators([Validators.required, Validators.minLength(8), Validators.maxLength(100)] );
+                     this.form.get('confirmNewPassword').setValidators(Validators.required);
+                    }
+                if(result === ''){
+                     this.form.get('newPassword').clearValidators();
+                     this.form.get('confirmNewPassword').clearValidators();
+                    }
+                    this.form.get('newPassword').updateValueAndValidity();
+                    this.form.get('confirmNewPassword').updateValueAndValidity();
+                });   
   }
 
   ngOnDestroy(): void {

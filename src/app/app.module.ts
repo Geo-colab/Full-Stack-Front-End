@@ -18,7 +18,8 @@ import { HomesForSaleComponent } from './homes-for-sale/homes-for-sale.component
 import { AdvertDetailsComponent } from './advert-details/advert-details.component';
 import { ContactSellerComponent } from './contact-seller/contact-seller.component';;
 import { ManageMyAccountComponent } from './manage-my-account/manage-my-account.component'
-
+;
+import { MySellerProfileComponent } from './my-seller-profile/my-seller-profile.component'
 @NgModule({
     imports: [
         BrowserModule,
@@ -34,7 +35,8 @@ import { ManageMyAccountComponent } from './manage-my-account/manage-my-account.
         HomesForSaleComponent ,
         AdvertDetailsComponent ,
         ContactSellerComponent ,
-        ManageMyAccountComponent      
+        ManageMyAccountComponent ,
+        MySellerProfileComponent     
                         ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

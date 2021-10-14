@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { environment } from '@environments/environment';
 import { User } from '@app/_models';
 import { Role } from '@app/_models/role.enum';
+import { Seller } from '@app/_models/seller';
 
 
 @Injectable({ providedIn: 'root' })
@@ -97,5 +98,13 @@ export class AccountService {
                 }
                 return x;
             }));
+    }
+    
+    getSellerByUserId(id: string) {
+        return this.http.get<Seller>(`${environment.apiUrl}/users/seller/${id}`);   
+    }
+
+    updateSeller(id, params: Seller) {
+        return this.http.put<Seller>(`${environment.apiUrl}/users/seller/update/${id}`, params);        
     }
 }
