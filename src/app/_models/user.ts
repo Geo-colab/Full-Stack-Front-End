@@ -12,5 +12,6 @@ export class User {
     role: Role;
     token: string;
     adverts: Advert[];
+    sellerId: string;
     seller: Seller;
 }

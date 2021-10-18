@@ -1,11 +1,13 @@
-.photo-placeholder {
+
+.seller-details {
     float: right;
 }
-
-.details {
+.advert-detials {
     float: left;
 }
-
+.photo-placeholder {
+    float: left;
+}
 .back-button {
     bottom: 0;
     position: absolute;

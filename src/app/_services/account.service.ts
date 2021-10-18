@@ -100,8 +100,12 @@ export class AccountService {
             }));
     }
     
-    getSellerByUserId(id: string) {
-        return this.http.get<Seller>(`${environment.apiUrl}/users/seller/${id}`);   
+    getSellerByUserId(userId: string) {
+        return this.http.get<Seller>(`${environment.apiUrl}/users/seller/${userId}`);
+    }
+
+    createSeller(seller: Seller) {
+        return this.http.post<Seller>(`${environment.apiUrl}/users/seller/create`, seller)
     }
 
     updateSeller(id, params: Seller) {
