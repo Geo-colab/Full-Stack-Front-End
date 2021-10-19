@@ -50,7 +50,7 @@ export class ManageMyAccountComponent implements OnInit {
           username: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100), Validators.email]],
           password: [''],
           newPassword: [''],
-          confirmNewPassword: ['']
+          confirmNewPassword: [''],
       },
       { validator: newPasswordMatcher('newPassword', 'confirmNewPassword')});
 
@@ -58,7 +58,7 @@ export class ManageMyAccountComponent implements OnInit {
               .subscribe(x => {
                   this.f.firstName.setValue(x.firstName);
                   this.f.lastName.setValue(x.lastName);
-                  this.f.username.setValue(x.username);
+                  this.f.username.setValue(x.username);   
                });  
         
         //Set validators for new password if password is entered       
