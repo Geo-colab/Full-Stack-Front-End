@@ -1,7 +1,7 @@
 <div class="p-4">
     <div class="container">
-        <h1>Advert Details</h1>  
         <div class="advert-details">
+        <h1>Advert Details</h1>  
             <h5>{{advert.advertHead}}</h5>
             <h6><b>Location:</b> {{advert.city.name}}, {{advert.province.name}}</h6>
             <h6><b>Price:</b> {{advert.price | currency:'ZAR' : 'symbol-narrow':'4.2-2'}}</h6>
@@ -10,19 +10,15 @@
         <div class="photo-placeholder">
             <img src="assets\WHPhotoFiller.jpeg">
         </div>
+        <div class="back-button">
+            <a routerLink="/homes-for-sale" class="btn btn-link"><--Back</a>
+        </div>
         <div class="seller-details">
-            <h1>Seller Details</h1>
-            <h6><b>Name:</b> {{user.firstName}} {{user.lastName}}</h6>
-            <h6><b>Email:</b> {{seller.email}}</h6>
-            <h6><b>Phone:</b> {{seller.phone}}</h6>
+           <app-contact-seller></app-contact-seller>
         </div>
         </div>      
 </div>
-<div class="p-4">
-    <div class="container">
-        <div class="back-button">
-            <a routerLink="/homes-for-sale" class="btn btn-link">Back</a>
-        </div>
-        </div>
-        </div>
+
+        
+        
 

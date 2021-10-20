@@ -1,15 +1,48 @@
-<div class='card-body'>
-    <div class='row'>
-      <div class='col-md-2'>
-        <input type='text'
-               placeholder="Search Ads..."
-               />
-        <select>
-            <option disabled selected>Order By:</option>
-            <option>Price High To Low</option>
-            <option>Price Low To High</option>
-        </select>
-            
+<div class="col d-flex justify-content-center">
+<div class="card w-50">
+  <h4 class="card-header">Search</h4>
+  <div class="card-body">
+      <form  [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+        <div class="form-group col">
+              <label for="provinceId">Province</label>
+              <select formControlName="provinceId" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.provinceId.errors }"
+                      (change) = "getCities()">
+                <option *ngFor="let province of provinces" [value]="province.id">{{province.name}}</option>
+                </select>
+              <div class="invalid">
+              <p><small>Required</small></p>
+              </div>
+          </div>
+          <div class="form-group col">
+              <label for="cityId">City</label>
+              <select formControlName="cityId" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.cityId.errors }">
+                <option *ngFor="let city of cities" [value]="city.id">{{city.name}}</option>
+                </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col">
+              <label for="minPrice">Minimum Price</label>
+              <select type="text" formControlName="minPrice" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.minPrice.errors }" >
+                <option></option>
+              </select> 
+          </div>
+          <div class="form-group col">
+              <label for="maxPrice">Maximum Price</label>
+              <select formControlName="maxPrice" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.maxPrice.errors }">
+                <option></option>
+              </select>
+          </div>
+        </div>
+          <div class="form-group">
+              <button [disabled]="loading" class="btn btn-primary">
+                  <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                  Search Properties
+              </button>
+          </div>
+      </form>
+  </div>
 </div>
 </div>
 

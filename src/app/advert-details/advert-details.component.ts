@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { User } from '@app/_models';
 import { Advert } from '@app/_models/advert';
 import { Seller } from '@app/_models/seller';
-import { AccountService } from '@app/_services';
 import { AdvertService } from '@app/_services/advert.service';
 
 @Component({
@@ -19,10 +18,8 @@ export class AdvertDetailsComponent implements OnInit {
   seller: Seller;
 
   constructor( private route: ActivatedRoute,
-              private advertService: AdvertService,
-              private accountService: AccountService) { 
-                this.user = this.accountService.userValue;
-              }
+              private advertService: AdvertService
+              ) { }
 
   ngOnInit(): void {
 
@@ -31,8 +28,7 @@ export class AdvertDetailsComponent implements OnInit {
     this.advertService.getById(this.id)
         .subscribe(advert => this.advert = advert);
 
-    this.accountService.getSellerByUserId(this.user.id)
-        .subscribe(seller => this.seller = seller)
+    
   }
 
     
