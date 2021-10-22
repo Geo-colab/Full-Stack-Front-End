@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Advert } from '@app/_models/advert';
+import { AdvertSearch } from '@app/_models/advert-search';
 import { City } from '@app/_models/city';
+import { PriceInterval } from '@app/_models/price-interval';
 import { Province } from '@app/_models/province';
 import { environment } from '@environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -55,4 +57,15 @@ export class AdvertService {
     updateAdvert(id, params: Advert) {
         return this.http.put<Advert>(`${environment.apiUrl}/adverts/${id}`, params);        
     }
+
+    //Price Interval HTTP Methods
+    getAllPriceIntervals() { 
+        return this.http.get<PriceInterval[]>(`${environment.apiUrl}/adverts/price-intervals`);       
+     }
+
+     //SearchAdvert
+     getSearchedAdverts(advertSearch: AdvertSearch) {
+        return this.http.post<Advert[]>(`${environment.apiUrl}/adverts/search-adverts`, advertSearch);
+    }   
+     
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '@app/_models';
@@ -7,7 +7,7 @@ import { AdvertState } from '@app/_models/advert-state.enum';
 import { City } from '@app/_models/city';
 import { AccountService, AlertService } from '@app/_services';
 import { AdvertService } from '@app/_services/advert.service';
-import { first } from 'rxjs/operators'; 
+
 
 @Component({
   selector: 'app-add-edit-adverts',
@@ -137,7 +137,5 @@ export class AddEditAdvertsComponent implements OnInit {
                 this.loading = false;
             });
 }
-
-
 }
 

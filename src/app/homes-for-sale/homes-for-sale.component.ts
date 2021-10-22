@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Advert } from '@app/_models/advert';
 import { AdvertService } from '@app/_services/advert.service';
 
 @Component({

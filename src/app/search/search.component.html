@@ -1,6 +1,6 @@
 <div class="col d-flex justify-content-center">
 <div class="card w-50">
-  <h4 class="card-header">Search</h4>
+  <h4 class="card-header">Search Properties</h4>
   <div class="card-body">
       <form  [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="form-row">
@@ -24,22 +24,29 @@
         <div class="form-row">
           <div class="form-group col">
               <label for="minPrice">Minimum Price</label>
-              <select type="text" formControlName="minPrice" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.minPrice.errors }" >
-                <option></option>
+              <select formControlName="minPrice" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.minPrice.errors }" 
+                      (change) = "getMaxPrices()">
+                <option *ngFor="let minPrice of minPrices" [value]="minPrice.priceIntervalValue">{{minPrice.priceIntervalDisplay}}</option>
               </select> 
           </div>
           <div class="form-group col">
               <label for="maxPrice">Maximum Price</label>
               <select formControlName="maxPrice" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.maxPrice.errors }">
-                <option></option>
+                <option *ngFor="let maxPrice of maxPrices" [value]="maxPrice.priceIntervalValue">{{maxPrice.priceIntervalDisplay}}</option>
               </select>
           </div>
         </div>
+        <div class="form-row">
+              <label for="keyword">Keyword</label>
+              <input type="text" formControlName="keyword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.keyword.errors }"/>
+          </div>
+          <div class="form-row">
           <div class="form-group">
               <button [disabled]="loading" class="btn btn-primary">
                   <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                  Search Properties
+                  Search
               </button>
+          </div>
           </div>
       </form>
   </div>
