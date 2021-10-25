@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Advert } from '@app/_models/advert';
 import { AdvertService } from '@app/_services/advert.service';
 
 @Component({
@@ -18,7 +19,12 @@ export class HomesForSaleComponent implements OnInit {
       {
         this.adverts = adverts.filter(filterAdvert => filterAdvert.advertState === 'Live');
       });
+  }
 
+  searchResults(advertResults: Advert[]) {
+     this.adverts = [];
+     this.adverts = [...advertResults].filter(filterAdvert => filterAdvert.advertState === 'Live');
+     console.log(this.adverts);
   }
 
 }

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Advert } from '@app/_models/advert';
 import { City } from '@app/_models/city';
 import { PriceInterval } from '@app/_models/price-interval';
@@ -21,10 +22,12 @@ export class SearchComponent implements OnInit {
   maxPrices: PriceInterval[] = [];
   private subForm: Subscription;
   advertSearchResults: Advert[] = [];
-
+  
+  @Output() searchResults: EventEmitter<any> = new EventEmitter;
 
   constructor( private formBuilder: FormBuilder,
-               private advertService: AdvertService) { }
+               private advertService: AdvertService,
+               private router: Router,) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -41,19 +44,6 @@ export class SearchComponent implements OnInit {
 
     this.advertService.getAllPriceIntervals()
     .subscribe((minPrices) => {this.minPrices = minPrices;})
-
-    //Set validators for maxPrice if minPrice is selected      
-    this.subForm = this.form.get('minPrice').valueChanges.subscribe(
-      (result: string) => {
-          if(result !== ''){
-               this.form.get('maxPrice').setValidators(Validators.required);
-              }
-          if(result === ''){
-               this.form.get('maxPrice').clearValidators();
-              }
-              this.form.get('maxPrice').updateValueAndValidity();
-          });   
-
   }
 
   // convenience getter for easy access to form fields
@@ -74,23 +64,27 @@ export class SearchComponent implements OnInit {
     });
   }
 
-  
+
   onSubmit() {
     this.submitted = true;
     // stop here if form is invalid
     if (this.form.invalid) {
         return;
     }
-   this.SearchAdverts(); 
+   this.SearchAdverts();
   }
 
   SearchAdverts() {
     this.advertService.getSearchedAdverts(this.form.value)
-    .subscribe((searchResults) => this.advertSearchResults = searchResults);
-    console.log(this.advertSearchResults);
+    .subscribe(searchResults => 
+      {this.advertSearchResults = searchResults;
+        this.searchResults.emit(this.advertSearchResults);
+        this.router.navigate(['homes-for-sale']);
+      });
+    console.log(this.advertSearchResults)
   }
 
-
+  
 }
 
 

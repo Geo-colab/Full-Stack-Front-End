@@ -2,7 +2,7 @@
     <div class="container">
         <span class="search-wrapper">
         <div class="search">
-            <app-search></app-search>
+            <app-search (searchResults) = 'searchResults($event)'></app-search>
         </div>
     </span>
     <div>

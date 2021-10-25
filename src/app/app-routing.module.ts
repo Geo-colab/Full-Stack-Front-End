@@ -6,6 +6,7 @@ import { HomesForSaleComponent } from './homes-for-sale/homes-for-sale.component
 import { ManageMyAccountComponent } from './manage-my-account/manage-my-account.component';
 
 import { MySellerProfileComponent } from './my-seller-profile/my-seller-profile.component';
+import { SearchComponent } from './search/search.component';
 import { AuthGuard } from './_helpers';
 import { Role } from './_models/role.enum';
 
